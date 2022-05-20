@@ -298,7 +298,7 @@ function plugins() {
 
     if (ENABLE_LINTING) {
       if (parsedTsConfig.exclude) {
-        tsEslintConfig.ignorePatterns = parsedTsConfig.exclude
+        tsEslintConfig.ignorePatterns = parsedTsConfig.exclude;
       }
       forkTsCheckerWebpackOptions.eslint = {
         files: path.join(servicePath, "**/*.ts"),
@@ -464,15 +464,19 @@ module.exports = {
   // PERFORMANCE ONLY FOR DEVELOPMENT
   optimization: isLocal
     ? {
+        minimize: false,
         nodeEnv: false,
         splitChunks: false,
         removeEmptyChunks: false,
         removeAvailableModules: false,
       }
     : {
+        minimize: false,
         nodeEnv: false,
         minimizer: [
           new ESBuildMinifyPlugin({
+            minimize: false,
+            keepNames: true,
             target: esbuildNodeVersion,
           }),
         ],
